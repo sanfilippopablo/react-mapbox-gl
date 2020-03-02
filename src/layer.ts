@@ -88,7 +88,7 @@ export interface OwnProps {
 export type Props = LayerCommonProps & LayerEvents & OwnProps;
 
 type EventToHandlersType = {
-  [key in keyof MapboxGL.MapLayerEventType]?: keyof LayerEvents
+  [key in keyof MapboxGL.MapLayerEventType]?: keyof LayerEvents;
 };
 
 const eventToHandler: EventToHandlersType = {
@@ -331,6 +331,7 @@ export default class Layer extends React.Component<Props> {
     }
 
     if (!isEqual(props.metadata, metadata)) {
+      // tslint:disable-next-line:no-any
       (map as any).style._layers[id].metadata = props.metadata;
     }
 

@@ -178,7 +178,7 @@ var Layer = (function (_super) {
     };
     Layer.prototype.UNSAFE_componentWillReceiveProps = function (props) {
         var _this = this;
-        var _a = this.props, paint = _a.paint, layout = _a.layout, before = _a.before, filter = _a.filter, id = _a.id, minZoom = _a.minZoom, maxZoom = _a.maxZoom;
+        var _a = this.props, paint = _a.paint, layout = _a.layout, before = _a.before, filter = _a.filter, id = _a.id, minZoom = _a.minZoom, maxZoom = _a.maxZoom, metadata = _a.metadata;
         var map = this.props.map;
         if (!isEqual(props.paint, paint)) {
             var paintDiff_1 = diff(paint, props.paint);
@@ -200,6 +200,9 @@ var Layer = (function (_super) {
         }
         if (minZoom !== props.minZoom || maxZoom !== props.maxZoom) {
             map.setLayerZoomRange(id, props.minZoom, props.maxZoom);
+        }
+        if (!isEqual(props.metadata, metadata)) {
+            map.style._layers[id].metadata = props.metadata;
         }
         Object.entries(eventToHandler).forEach(function (_a) {
             var event = _a[0], propName = _a[1];
